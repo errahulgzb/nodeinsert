@@ -43,3 +43,14 @@ app.get("/employees/:id",(req,res)=>{
 			console.log(err);
 	})
 });
+
+
+// get record by user id
+app.delete("/employees/:id",(req,res)=>{
+	mysqlConnection.query("DELETE FROM employee WHERE empid=?",[req.params.id],(err,rows,fields)=>{
+		if(!err)
+			res.send("Deleted susscefully!.");
+		else
+			console.log(err);
+	})
+});
