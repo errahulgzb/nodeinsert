@@ -23,7 +23,7 @@ mysqlConnection.connect((err)=>{
 
 app.listen(3000,()=>console.log("Express server is runing on at port no:3000"));
 
-
+// geting all record from database
 app.get("/employees",(req,res)=>{
 	mysqlConnection.query("SELECT * FROM employee",(err,rows,fields)=>{
 		if(!err)
@@ -31,4 +31,15 @@ app.get("/employees",(req,res)=>{
 		else
 			console.log(err);
 	})
-})
+});
+
+
+// get record by user id
+app.get("/employees/:id",(req,res)=>{
+	mysqlConnection.query("SELECT * FROM employee WHERE empid=?",[req.params.id],(err,rows,fields)=>{
+		if(!err)
+			res.send(rows);
+		else
+			console.log(err);
+	})
+});
